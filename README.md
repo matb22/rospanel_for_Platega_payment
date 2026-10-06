@@ -73,7 +73,7 @@ One command: downloads the release, installs a systemd service and `nftables` (i
 it and prints the login.
 
 ```bash
-curl -Ls https://raw.githubusercontent.com/AppsGanin/rospanel/main/install.sh | sudo bash
+curl -Ls https://raw.githubusercontent.com/matb22/rospanel_for_Platega_payment/main/install.sh | sudo bash
 ```
 
 **A domain is optional.** The script will ask for one: if you have a domain, enter it; if you
@@ -84,34 +84,6 @@ warnings.
 You can set the domain up front and skip the question:
 `curl -Ls … | sudo ROSPANEL_HOST=vpn.example.com bash`.
 
-### Option 2 — binary + systemd by hand
-
-```bash
-# download the latest release (replace amd64 with arm64 for ARM servers)
-curl -fsSL -o rospanel \
-  https://github.com/AppsGanin/rospanel/releases/latest/download/rospanel-linux-amd64
-chmod +x rospanel
-
-# install as a service (copies the binary to /usr/local/bin, writes a systemd unit, starts it)
-sudo ./rospanel install
-#   with a domain right away:  sudo ROSPANEL_HOST=vpn.example.com ./rospanel install
-
-# the login and the secret path are printed ONCE:
-journalctl -u rospanel | grep -A6 FIRST-RUN
-```
-
-### Option 3 — Docker
-
-```bash
-docker run -d --name rospanel \
-  --network host \
-  --cap-add NET_ADMIN \
-  --device /dev/net/tun \
-  -v rospanel-data:/data \
-  ghcr.io/appsganin/rospanel:latest
-
-docker logs rospanel | grep -A6 FIRST-RUN
-```
 
 > [!NOTE]
 > `--network host` is required so Xray can listen on 443/TCP, 80/TCP and the Hysteria2 UDP
