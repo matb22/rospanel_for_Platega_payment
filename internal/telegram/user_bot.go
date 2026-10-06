@@ -404,8 +404,8 @@ func (s *UserService) handleStart(ctx context.Context, client *Client, set *mode
 	}
 	if u, ok := s.findLinkedUser(chatID); ok {
 		s.sendUserMenu(ctx, client, chatID, set, u)
-		s.send(ctx, client, chatID, "📌 <b>Политика конфиденциальности - https://telegra.ph/Politika-konfidencialnosti-10-06-56</b>.")
-		s.send(ctx, client, chatID, "📌 <b>Пользовательское соглашение - https://telegra.ph/Polzovatelskoe-soglashenie-10-06-46</b>.")
+		s.send(ctx, client, chatID, "📌 <b>Политика конфиденциальности - https://telegra.ph/Politika-konfidencialnosti-10-06-56</b>. \n\n <b>Пользовательское соглашение - https://telegra.ph/Polzovatelskoe-soglashenie-10-06-46</b>. \n\n <b>Поддержка - mold-chump-train@duck.com</b>.")
+		
 		return
 	}
 	s.sendWelcome(ctx, client, set, chatID)
